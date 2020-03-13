@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="233dp"
+        android:layout_height="151dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logoisen" />
+
+    <TextView
+        android:id="@+id/bonjour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="32dp"
+        android:text="Bonjour"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <ImageView
+        android:id="@+id/imageViewLifeCycle"
+        android:layout_width="80dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewSave"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bonjour"
+        app:srcCompat="@drawable/sms" />
+
+    <ImageView
+        android:id="@+id/imageViewSave"
+        android:layout_width="103dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bonjour"
+        app:srcCompat="@drawable/sdcard" />
+
+    <ImageView
+        android:id="@+id/imageViewPermissions"
+        android:layout_width="88dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="92dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLifeCycle"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/call" />
+
+    <ImageView
+        android:id="@+id/imageViewWebServices"
+        android:layout_width="84dp"
+        android:layout_height="85dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toEndOf="@+id/imageViewPermissions"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewSave"
+        app:layout_constraintVertical_bias="0.4"
+        app:srcCompat="@drawable/download" />
+
+    <TextView
+        android:id="@+id/textViewLifeCycle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Cycle de vie"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewLifeCycle"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLifeCycle"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLifeCycle" />
+
+    <TextView
+        android:id="@+id/textViewSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Sauveguarder"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewWebServices"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewSave"
+        app:layout_constraintStart_toStartOf="@+id/imageViewSave"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewSave"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewPermissions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Permissions"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewPermissions"
+        app:layout_constraintStart_toStartOf="@+id/imageViewPermissions"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewPermissions" />
+
+    <TextView
+        android:id="@+id/textViewWebServices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Webservices"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewWebServices"
+        app:layout_constraintStart_toStartOf="@+id/imageViewWebServices"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewWebServices" />
+
+    <Button
+        android:id="@+id/boutonDeconnexion"
+        android:layout_width="124dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="16dp"
+        android:text="Deconnexion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bonjour"
+        app:layout_constraintVertical_bias="0.948" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
