@@ -1,4 +1,4 @@
-package fr.isen.bechard.androidtoolbox
+package fr.isen.bechard.androidtoolbox.activities
 
 import android.content.Context
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import fr.isen.bechard.androidtoolbox.*
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -35,7 +36,8 @@ class HomeActivity : AppCompatActivity() {
         }
 
         imageViewWebServices.setOnClickListener {
-            Toast.makeText(this, "Cette page n'a pas encore été codée", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, WebServicesActivity::class.java)
+            startActivity(intent)
         }
 
         boutonDeconnexion.setOnClickListener {
@@ -46,6 +48,10 @@ class HomeActivity : AppCompatActivity() {
             val editor = sharedPreferences.edit()
             editor.clear()
             editor.apply()
+        }
+        BoutonBluetoothImageView.setOnClickListener {
+            val intent = Intent(this, BLEScanActivity::class.java)
+            startActivity(intent)
         }
     }
 }

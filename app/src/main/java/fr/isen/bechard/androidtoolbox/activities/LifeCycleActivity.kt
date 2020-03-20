@@ -14,7 +14,6 @@ class LifeCycleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_life_cycle)
 
         boutonPause.setOnClickListener{
-            Thread.sleep(3_000)
             Toast.makeText(this, "Sortie de pause de l'application", Toast.LENGTH_LONG).show()
             textViewNumberOfCycles.text = texteAffiche
         }

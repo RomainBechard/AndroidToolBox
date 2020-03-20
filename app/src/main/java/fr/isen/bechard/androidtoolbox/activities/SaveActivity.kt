@@ -83,7 +83,7 @@ class SaveActivity : AppCompatActivity() {
         boutonLecture.setOnClickListener {
             val json = JSONObject(File("$cacheDir/sauveguarde.json").readText())
             val prenomLu = json.getString("prenom")
-            val nomLu = json.getString("prenom")
+            val nomLu = json.getString("nom")
             val DateDeNaissanceLu = json.getString("dateDeNaissance")
 
             if (prenomLu == "" || nomLu =="" || DateDeNaissanceLu == ""){

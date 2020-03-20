@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/boutonBluetooth"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    tools:context=".activities.HomeActivity">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -36,9 +37,9 @@
         android:layout_width="80dp"
         android:layout_height="98dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="68dp"
         app:layout_constraintEnd_toStartOf="@+id/imageViewSave"
-        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bonjour"
         app:srcCompat="@drawable/sms" />
@@ -47,8 +48,8 @@
         android:id="@+id/imageViewSave"
         android:layout_width="103dp"
         android:layout_height="81dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bonjour"
         app:srcCompat="@drawable/sdcard" />
@@ -67,15 +68,15 @@
 
     <ImageView
         android:id="@+id/imageViewWebServices"
-        android:layout_width="84dp"
-        android:layout_height="85dp"
-        android:layout_marginEnd="60dp"
+        android:layout_width="97dp"
+        android:layout_height="87dp"
+        android:layout_marginEnd="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/imageViewPermissions"
         app:layout_constraintTop_toBottomOf="@+id/imageViewSave"
-        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintVertical_bias="0.482"
         app:srcCompat="@drawable/download" />
 
     <TextView
@@ -132,5 +133,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bonjour"
         app:layout_constraintVertical_bias="0.948" />
+
+    <ImageView
+        android:id="@+id/BoutonBluetoothImageView"
+        android:layout_width="69dp"
+        android:layout_height="56dp"
+        android:background="#2196F3"
+        app:layout_constraintBottom_toTopOf="@+id/boutonDeconnexion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bonjour"
+        app:layout_constraintVertical_bias="0.613"
+        app:srcCompat="@android:drawable/stat_sys_data_bluetooth" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

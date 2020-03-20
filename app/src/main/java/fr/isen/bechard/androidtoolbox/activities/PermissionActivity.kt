@@ -1,4 +1,4 @@
-package fr.isen.bechard.androidtoolbox
+package fr.isen.bechard.androidtoolbox.activities
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -12,12 +12,10 @@ import android.provider.MediaStore
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_login.*
+import fr.isen.bechard.androidtoolbox.R
 import kotlinx.android.synthetic.main.activity_permission.*
 
 class PermissionActivity : AppCompatActivity() {
-
-    private lateinit var linearLayoutManager: LinearLayoutManager
 
     val contacts = mutableListOf<String>()
 
@@ -30,10 +28,8 @@ class PermissionActivity : AppCompatActivity() {
         contactRecycler.adapter = ContactAdapter(contacts.sorted())
         contactRecycler.layoutManager = LinearLayoutManager(this)
 
-        //contact_list.adapter =
-        //   ArrayAdapter(this, android.R.layout.simple_list_item_1, contacts.sorted())
 
-        imageView.setOnClickListener {
+        imageCamera.setOnClickListener {
             showPictureDialog();
         }
     }
@@ -71,10 +67,10 @@ class PermissionActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == 1000) {
-            imageView.setImageURI(data?.data)
+            imageCamera.setImageURI(data?.data)
         }else if (resultCode == Activity.RESULT_OK && requestCode == 1001) {
             var bmp = data?.extras?.get("data") as Bitmap
-            imageView.setImageBitmap(bmp)
+            imageCamera.setImageBitmap(bmp)
         }
     }
 
@@ -92,7 +88,7 @@ class PermissionActivity : AppCompatActivity() {
             while (cursor.moveToNext()) {
                 val name =
                     cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
-                contacts.add("  Nom : $name")
+                contacts.add("$name")
             }
         } else {
             Toast.makeText(applicationContext, "No contacts available!", Toast.LENGTH_SHORT).show()
