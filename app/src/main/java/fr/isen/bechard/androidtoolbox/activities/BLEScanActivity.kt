@@ -52,6 +52,7 @@ class BLEScanActivity : AppCompatActivity() {
                     //ask for permission
                     val enableBTIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                     startActivityForResult(enableBTIntent, REQUEST_ENABLE_BT)
+                    initBLEScan()
                 }
                 else -> {
                     //device is not compatible with your device
@@ -92,7 +93,6 @@ class BLEScanActivity : AppCompatActivity() {
     private val leScanCallback = object : ScanCallback() {
         override fun onScanResult(callbackType: Int, result: ScanResult) {
             super.onScanResult(callbackType, result)
-            Log.w("BLEScanActivity", "onResult()")
             Log.w("BLEScanActivity", "CaAMarche ${result?.device}")
             runOnUiThread {
                 adapter.addDeviceToList(result)
