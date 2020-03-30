@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#D7D3D1D1"
     tools:context=".activities.BLEScanActivity">
 
     <TextView

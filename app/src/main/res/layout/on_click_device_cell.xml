@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#F6FEFF">
 
     <TextView
         android:id="@+id/ServiceNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -58,12 +60,12 @@
         app:layout_constraintTop_toBottomOf="@+id/ValueTextView" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/BoutonNotifier"
         android:layout_width="91dp"
         android:layout_height="43dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
-        android:text="Button"
+        android:text="Notifier"
         app:layout_constraintStart_toEndOf="@+id/BoutonEcriture"
         app:layout_constraintTop_toBottomOf="@+id/ValueTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
