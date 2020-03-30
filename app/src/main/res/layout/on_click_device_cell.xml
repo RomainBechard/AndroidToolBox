@@ -2,70 +2,92 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#F6FEFF">
+    android:background="#9CF1F1F1">
 
     <TextView
-        android:id="@+id/ServiceNameTextView"
+        android:id="@+id/CharacteristicProperties"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/rationale"
+        android:text="Propriétés"
+        app:layout_constraintEnd_toEndOf="@+id/CharacteristicValue"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/CharacteristicValue"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/ServiceUUIDTextView"
+        android:id="@+id/CharacteristicValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:fontFamily="@font/rationale"
+        android:text="Valeur"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.098"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ServiceNameTextView" />
-
-    <TextView
-        android:id="@+id/ServicePropertiesTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ServiceUUIDTextView" />
-
-    <TextView
-        android:id="@+id/ValueTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ServicePropertiesTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/CharacteristicProperties" />
 
     <Button
         android:id="@+id/BoutonLecture"
-        android:layout_width="94dp"
+        android:layout_width="90dp"
         android:layout_height="40dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/rationale"
         android:text="Lecture"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ValueTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/CharacteristicValue" />
 
     <Button
         android:id="@+id/BoutonEcriture"
-        android:layout_width="91dp"
+        android:layout_width="90dp"
         android:layout_height="40dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/rationale"
         android:text="Ecriture"
         app:layout_constraintStart_toEndOf="@+id/BoutonLecture"
-        app:layout_constraintTop_toBottomOf="@+id/ValueTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/CharacteristicValue" />
 
     <Button
         android:id="@+id/BoutonNotifier"
-        android:layout_width="91dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/rationale"
         android:text="Notifier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/BoutonEcriture"
-        app:layout_constraintTop_toBottomOf="@+id/ValueTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/CharacteristicValue" />
+
+    <TextView
+        android:id="@+id/CharacteristicName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rationale"
+        android:text="Nom"
+        app:layout_constraintBottom_toTopOf="@+id/CharacteristicUuid"
+        app:layout_constraintEnd_toEndOf="@+id/CharacteristicUuid"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/CharacteristicUuid"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/CharacteristicUuid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rationale"
+        android:text="UUID"
+        app:layout_constraintBottom_toTopOf="@+id/CharacteristicProperties"
+        app:layout_constraintEnd_toEndOf="@+id/CharacteristicProperties"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/CharacteristicProperties"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

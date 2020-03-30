@@ -2,149 +2,170 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/boutonBluetooth"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D7D3D1D1"
     tools:context=".activities.HomeActivity">
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="233dp"
-        android:layout_height="151dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
+        android:id="@+id/imageView4"
+        android:layout_width="171dp"
+        android:layout_height="87dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logoisen" />
+        app:layout_constraintTop_toBottomOf="@+id/boutonDeconnexion"
+        app:srcCompat="@drawable/logo_isen_fond_transparent" />
 
     <TextView
         android:id="@+id/bonjour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="32dp"
-        android:text="Bonjour"
+        android:fontFamily="@font/press_start_2p"
+        android:text="BONJOUR !"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.08" />
 
     <ImageView
         android:id="@+id/imageViewLifeCycle"
-        android:layout_width="80dp"
-        android:layout_height="98dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="68dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewSave"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bonjour"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewSave"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewSave"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/imageViewSave"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/sms" />
 
     <ImageView
         android:id="@+id/imageViewSave"
-        android:layout_width="103dp"
-        android:layout_height="81dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bonjour"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/BoutonBluetoothImageView"
+        app:layout_constraintEnd_toEndOf="@+id/BoutonBluetoothImageView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/BoutonBluetoothImageView"
         app:srcCompat="@drawable/sdcard" />
 
     <ImageView
         android:id="@+id/imageViewPermissions"
-        android:layout_width="88dp"
-        android:layout_height="84dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="92dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewLifeCycle"
-        app:layout_constraintVertical_bias="0.0"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewWebServices"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewWebServices"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageViewWebServices"
         app:srcCompat="@drawable/call" />
 
     <ImageView
         android:id="@+id/imageViewWebServices"
-        android:layout_width="97dp"
-        android:layout_height="87dp"
-        android:layout_marginEnd="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/imageViewPermissions"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewSave"
-        app:layout_constraintVertical_bias="0.482"
+        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.654"
         app:srcCompat="@drawable/download" />
 
     <TextView
-        android:id="@+id/textViewLifeCycle"
+        android:id="@+id/LifeCycleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/press_start_2p"
         android:text="Cycle de vie"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewLifeCycle"
-        app:layout_constraintStart_toStartOf="@+id/imageViewLifeCycle"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewLifeCycle" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/SaveTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.295"
+        app:layout_constraintStart_toEndOf="@+id/imageViewLifeCycle"
+        app:layout_constraintTop_toBottomOf="@+id/bonjour"
+        app:layout_constraintVertical_bias="0.553" />
 
     <TextView
-        android:id="@+id/textViewSave"
+        android:id="@+id/SaveTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Sauveguarder"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewWebServices"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewSave"
-        app:layout_constraintStart_toStartOf="@+id/imageViewSave"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewSave"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_marginBottom="60dp"
+        android:fontFamily="@font/press_start_2p"
+        android:text="Sauvegarder"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/BluetoothTextView"
+        app:layout_constraintEnd_toEndOf="@+id/LifeCycleTextView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/LifeCycleTextView" />
 
     <TextView
-        android:id="@+id/textViewPermissions"
+        android:id="@+id/PermissionsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="60dp"
+        android:fontFamily="@font/press_start_2p"
         android:text="Permissions"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewPermissions"
-        app:layout_constraintStart_toStartOf="@+id/imageViewPermissions"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewPermissions" />
+        app:layout_constraintBottom_toTopOf="@+id/WebServicesTextView"
+        app:layout_constraintEnd_toEndOf="@+id/BluetoothTextView"
+        app:layout_constraintStart_toStartOf="@+id/BluetoothTextView" />
 
     <TextView
-        android:id="@+id/textViewWebServices"
+        android:id="@+id/WebServicesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="48dp"
+        android:fontFamily="@font/press_start_2p"
         android:text="Webservices"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewWebServices"
-        app:layout_constraintStart_toStartOf="@+id/imageViewWebServices"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewWebServices" />
+        app:layout_constraintBottom_toTopOf="@+id/boutonDeconnexion"
+        app:layout_constraintEnd_toEndOf="@+id/PermissionsTextView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/PermissionsTextView" />
 
     <Button
         android:id="@+id/boutonDeconnexion"
-        android:layout_width="124dp"
-        android:layout_height="45dp"
+        android:layout_width="194dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="@font/press_start_2p"
         android:text="Deconnexion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bonjour"
-        app:layout_constraintVertical_bias="0.948" />
+        app:layout_constraintVertical_bias="0.768" />
+
+    <TextView
+        android:id="@+id/BluetoothTextView"
+        android:layout_width="215dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="60dp"
+        android:fontFamily="@font/press_start_2p"
+        android:text="Ressources BLE"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/PermissionsTextView"
+        app:layout_constraintEnd_toEndOf="@+id/SaveTextView"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="@+id/SaveTextView" />
 
     <ImageView
         android:id="@+id/BoutonBluetoothImageView"
-        android:layout_width="69dp"
-        android:layout_height="56dp"
-        android:background="#2196F3"
-        app:layout_constraintBottom_toTopOf="@+id/boutonDeconnexion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bonjour"
-        app:layout_constraintVertical_bias="0.613"
-        app:srcCompat="@android:drawable/stat_sys_data_bluetooth" />
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewPermissions"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewPermissions"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageViewPermissions"
+        app:srcCompat="@drawable/bluetooth_black" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

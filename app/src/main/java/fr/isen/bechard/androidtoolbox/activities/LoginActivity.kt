@@ -1,13 +1,16 @@
-package fr.isen.bechard.androidtoolbox
+package fr.isen.bechard.androidtoolbox.activities
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import fr.isen.bechard.androidtoolbox.activities.HomeActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import fr.isen.bechard.androidtoolbox.R
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.layout
 
 class LoginActivity : AppCompatActivity() {
 
@@ -21,6 +24,12 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        /*val constraintLayout: ConstraintLayout = layout
+        val animationDrawable = constraintLayout.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(500)
+        animationDrawable.setExitFadeDuration(2000)
+        animationDrawable.start()*/
 
         sharedPreferences = getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE)
 

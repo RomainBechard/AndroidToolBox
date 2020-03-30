@@ -22,6 +22,7 @@
             android:id="@+id/Prenom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/press_start_2p"
             android:hint="Prenom" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -30,6 +31,7 @@
         android:layout_width="139dp"
         android:layout_height="29dp"
         android:layout_marginStart="40dp"
+        android:fontFamily="@font/press_start_2p"
         android:text="Date de naissance :"
         app:layout_constraintBottom_toTopOf="@+id/boutonValiderData"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,8 +40,9 @@
 
     <TextView
         android:id="@+id/DateDeNaissance"
-        android:layout_width="114dp"
-        android:layout_height="30dp"
+        android:layout_width="146dp"
+        android:layout_height="25dp"
+        android:fontFamily="@font/press_start_2p"
         android:text="../../...."
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/boutonValiderData"
@@ -64,6 +67,7 @@
             android:id="@+id/Nom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fontFamily="@font/press_start_2p"
             android:hint="Nom" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,6 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="236dp"
+        android:fontFamily="@font/press_start_2p"
         android:text="Sauveguarder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,6 +87,7 @@
         android:id="@+id/boutonLecture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/press_start_2p"
         android:text="Lecture"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

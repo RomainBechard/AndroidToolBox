@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#39C0CF"
-    android:backgroundTint="#DAF0F3">
+    android:background="#D7D3D1D1">
 
     <TextView
         android:id="@+id/ServiceNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/rationale"
         android:text="TextView"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,25 +21,26 @@
         android:id="@+id/ServiceUUIDTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
         android:layout_marginBottom="8dp"
+        android:fontFamily="@font/rationale"
         android:text="TextView"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ServiceNameTextView"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="24dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="8dp"
+        android:id="@+id/ArrowDown"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="36dp"
         android:background="#006F899E"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ServiceNameTextView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.555"
+        app:layout_constraintVertical_bias="0.444"
         app:srcCompat="@drawable/down_arrow"
         tools:srcCompat="@drawable/down_arrow" />
 

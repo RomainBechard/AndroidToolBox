@@ -25,14 +25,7 @@ class BLEDeviceActivity : AppCompatActivity() {
         DeviceNameTextView.text = device?.name
         DeviceAddressTextView.text = device?.address
 
-
-        /*val services: MutableList<BLEService>
-
-        //instantiate your adapter with the list of genres
-        val adapter = BLESingleDeviceAdapter(services)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = adapter*/
-
+        //item decoration
         val recyclerView = BLEServiceList
         val layoutManager = LinearLayoutManager(this)
         val mDividerItemDecoration = DividerItemDecoration(

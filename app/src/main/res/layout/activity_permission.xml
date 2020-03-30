@@ -24,6 +24,7 @@
         android:id="@+id/permissionTitr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/rationale"
         android:text="Accès aux contacts"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/contactRecycler"

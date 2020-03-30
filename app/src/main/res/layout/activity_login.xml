@@ -2,24 +2,28 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D7D3D1D1"
-    tools:context=".LoginActivity">
+    tools:context=".activities.LoginActivity">
 
     <TextView
         android:id="@+id/signIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="148dp"
+        android:layout_height="54dp"
         android:layout_marginTop="24dp"
-        android:background="@color/colorAccent"
+        android:background="#00FFFFFF"
+        android:fontFamily="@font/rationale"
         android:text="Connexion"
-        android:textSize="18sp"
+        android:textSize="36sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143" />
+        app:layout_constraintVertical_bias="0.145" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout3"
@@ -37,6 +41,7 @@
             android:id="@+id/identifiants"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/rationale"
             android:hint="Identifiants"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -61,6 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:accessibilityLiveRegion="none"
+            android:fontFamily="@font/rationale"
             android:hint="Mot de passe"
             android:includeFontPadding="false"
             android:inputType="textPassword"
@@ -80,18 +86,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signIn"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/logoisen" />
+        app:srcCompat="@drawable/logo_isen_fond_transparent" />
 
     <Button
         android:id="@+id/boutonValider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/rationale"
         android:text="Valider"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordLayout"
-        app:layout_constraintVertical_bias="0.254" />
+        app:layout_constraintVertical_bias="0.253" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

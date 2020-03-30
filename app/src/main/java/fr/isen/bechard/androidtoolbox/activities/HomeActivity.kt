@@ -3,11 +3,14 @@ package fr.isen.bechard.androidtoolbox.activities
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import fr.isen.bechard.androidtoolbox.*
 import kotlinx.android.synthetic.main.activity_home.*
+
 
 class HomeActivity : AppCompatActivity() {
 
@@ -18,25 +21,60 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        /*val constraintLayout: ConstraintLayout = layout
+        val animationDrawable = constraintLayout.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(500)
+        animationDrawable.setExitFadeDuration(2000)
+        animationDrawable.start()*/
+
         sharedPreferences = getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE)
 
         imageViewLifeCycle.setOnClickListener {
             val intent = Intent(this, LifeCycleActivity::class.java)
             startActivity(intent)
         }
+        LifeCycleTextView.setOnClickListener{
+            val intent = Intent(this, LifeCycleActivity::class.java)
+            startActivity(intent)
+        }
+
 
         imageViewSave.setOnClickListener {
             val intent = Intent(this, SaveActivity::class.java)
             startActivity(intent)
         }
+        SaveTextView.setOnClickListener{
+            val intent = Intent(this, SaveActivity::class.java)
+            startActivity(intent)
+        }
+
 
         imageViewPermissions.setOnClickListener {
             val intent = Intent(this, PermissionActivity::class.java)
             startActivity(intent)
         }
+        PermissionsTextView.setOnClickListener{
+            val intent = Intent(this, PermissionActivity::class.java)
+            startActivity(intent)
+        }
+
 
         imageViewWebServices.setOnClickListener {
             val intent = Intent(this, WebServicesActivity::class.java)
+            startActivity(intent)
+        }
+        WebServicesTextView.setOnClickListener{
+            val intent = Intent(this, WebServicesActivity::class.java)
+            startActivity(intent)
+        }
+
+
+        BoutonBluetoothImageView.setOnClickListener {
+            val intent = Intent(this, BLEScanActivity::class.java)
+            startActivity(intent)
+        }
+        BluetoothTextView.setOnClickListener{
+            val intent = Intent(this, BLEScanActivity::class.java)
             startActivity(intent)
         }
 
@@ -49,9 +87,6 @@ class HomeActivity : AppCompatActivity() {
             editor.clear()
             editor.apply()
         }
-        BoutonBluetoothImageView.setOnClickListener {
-            val intent = Intent(this, BLEScanActivity::class.java)
-            startActivity(intent)
-        }
+
     }
 }
