@@ -15,6 +15,7 @@ class BLEDeviceActivity : AppCompatActivity() {
 
     var bluetoothGatt: BluetoothGatt? = null
     private lateinit var adapter: BLESingleDeviceAdapter
+    private lateinit var service: BluetoothGattService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +75,8 @@ class BLEDeviceActivity : AppCompatActivity() {
                                 it.uuid.toString(),
                                 it.characteristics
                             )
-                        }?.toMutableList() ?: arrayListOf()
+                        }?.toMutableList() ?: arrayListOf(),
+                        this@BLEDeviceActivity
                     )
                     BLEServiceList.layoutManager = LinearLayoutManager(this@BLEDeviceActivity)
                 }
@@ -88,7 +90,18 @@ class BLEDeviceActivity : AppCompatActivity() {
             ) {
                 when (status) {
                     BluetoothGatt.GATT_SUCCESS -> {
-                        //adapter.updateFromChangedCharacteristic(characteristic)
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+            }
+
+            override fun onCharacteristicWrite(
+                gatt: BluetoothGatt?,
+                characteristic: BluetoothGattCharacteristic?,
+                status: Int
+            ) {
+                when (status) {
+                    BluetoothGatt.GATT_SUCCESS -> {
                         adapter.notifyDataSetChanged()
                     }
                 }

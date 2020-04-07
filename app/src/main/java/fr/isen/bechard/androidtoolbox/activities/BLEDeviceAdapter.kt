@@ -11,19 +11,26 @@ import fr.isen.bechard.androidtoolbox.R
 import kotlinx.android.synthetic.main.activity_ble_scan_device_cell.view.*
 
 
-class BLEDeviceAdapter(private val scanResults: ArrayList<ScanResult>, private val deviceClickListener: (BluetoothDevice) -> Unit) :
+class BLEDeviceAdapter(
+    private val scanResults: ArrayList<ScanResult>,
+    private val deviceClickListener: (BluetoothDevice) -> Unit
+) :
     RecyclerView.Adapter<BLEDeviceAdapter.DevicesViewHolder>() {
 
 
-    class DevicesViewHolder(devicesView: View) : RecyclerView.ViewHolder(devicesView){
+    class DevicesViewHolder(devicesView: View) : RecyclerView.ViewHolder(devicesView) {
         val layout = devicesView.BLEDeviceLayout
         val deviceName: TextView = devicesView.DeviceNameTextView
         val deviceMac: TextView = devicesView.DeviceMACAddressTextView
         val deviceRSSI: TextView = devicesView.DeviceRSSITextView
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BLEDeviceAdapter.DevicesViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_ble_scan_device_cell, parent, false)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): BLEDeviceAdapter.DevicesViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.activity_ble_scan_device_cell, parent, false)
 
 
         return DevicesViewHolder(view)
@@ -35,18 +42,17 @@ class BLEDeviceAdapter(private val scanResults: ArrayList<ScanResult>, private v
         holder.deviceName.text = scanResults[position].device.name ?: "Device Unknown"
         holder.deviceMac.text = scanResults[position].device.address
         holder.deviceRSSI.text = scanResults[position].rssi.toString()
-        holder.layout.setOnClickListener{
+        holder.layout.setOnClickListener {
             deviceClickListener.invoke(scanResults[position].device)
         }
     }
-
 
 
     fun addDeviceToList(result: ScanResult) {
         val index = scanResults.indexOfFirst { it.device.address == result.device.address }
         if (index != -1) {
             scanResults[index] = result
-        }else {
+        } else {
             scanResults.add(result)
         }
     }

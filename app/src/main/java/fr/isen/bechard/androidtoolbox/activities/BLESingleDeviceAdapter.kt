@@ -1,6 +1,9 @@
 package fr.isen.bechard.androidtoolbox.activities
 
+import android.app.AlertDialog
 import android.bluetooth.BluetoothGattCharacteristic
+import android.content.Context
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,12 +15,15 @@ import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder
 import fr.isen.bechard.androidtoolbox.R
 import fr.isen.bechard.androidtoolbox.dataClass.BLEService
+import kotlinx.android.synthetic.main.alert_dialog_write.view.*
 import kotlinx.android.synthetic.main.ble_service.view.*
 import kotlinx.android.synthetic.main.on_click_device_cell.view.*
-import org.w3c.dom.Text
 
 
-class BLESingleDeviceAdapter(private val serviceList: MutableList<BLEService>) :
+class BLESingleDeviceAdapter(
+    private val serviceList: MutableList<BLEService>,
+    private val context: Context
+) :
     ExpandableRecyclerViewAdapter<BLESingleDeviceAdapter.ServiceViewHolder, BLESingleDeviceAdapter.CharacteristicViewHolder>(
         serviceList
     ) {
@@ -39,7 +45,7 @@ class BLESingleDeviceAdapter(private val serviceList: MutableList<BLEService>) :
         val characteristicName: TextView = itemView.CharacteristicName
         val characteristicUUID: TextView = itemView.CharacteristicUuid
         val characteristicProperties: TextView = itemView.CharacteristicProperties
-        val characteristicValue: TextView = itemView.CharacteristicValue
+        var characteristicValue: TextView = itemView.CharacteristicValue
 
         val characteristicRead: Button = itemView.BoutonLecture
         val characteristicWrite: Button = itemView.BoutonEcriture
@@ -66,28 +72,40 @@ class BLESingleDeviceAdapter(private val serviceList: MutableList<BLEService>) :
         group: ExpandableGroup<*>,
         childIndex: Int
     ) {
-        /*val characteristic: BluetoothGattCharacteristic = (group as BLEService).items[childIndex]
-        val uuid = characteristic.uuid
-        holder.characteristic.text = uuid.toString()*/
-
         val characteristic = (group.items[childIndex] as BluetoothGattCharacteristic)
         val title = BLEUUIDMatching.getBLEAttributeFromUUID(characteristic.uuid.toString()).title
 
         val uuidMessage = "UUID: ${characteristic.uuid}"
         holder.characteristicUUID.text = uuidMessage
-
         holder.characteristicName.text = title
 
-        val properties = arrayListOf<String>()
+        if (!proprieties(characteristic.properties).contains("Lire"))
+            holder.characteristicRead.visibility = View.GONE
+        if (!proprieties(characteristic.properties).contains("Ecrire"))
+            holder.characteristicWrite.visibility = View.GONE
+        if (!proprieties(characteristic.properties).contains("Notifier"))
+            holder.characteristicNotify.visibility = View.GONE
 
-        /*addPropertyFromCharacteristic(
-            characteristic,
-            properties,
-            "Lecture",
-            BluetoothGattCharacteristic.PROPERTY_READ,
-            holder.characteristicRead,
-            readCharacteristicCallback
-        )*/
+        holder.characteristicRead.setOnClickListener {
+            if (characteristic.value == null)
+                holder.characteristicValue.text = "Value = null"
+            else
+                holder.characteristicValue.text = "Value = " + characteristic.value.toString()
+        }
+
+        holder.characteristicWrite.setOnClickListener {
+            val dialog = AlertDialog.Builder(context)
+            val editView = View.inflate(context, R.layout.alert_dialog_write, null)
+            dialog.setView(editView)
+            dialog.setNegativeButton("Annuler", DialogInterface.OnClickListener { dialog, which ->  })
+            dialog.setPositiveButton("Valider", DialogInterface.OnClickListener {
+                    _, _ ->
+                val text : String = editView.StringToSendEditText.text.toString()
+                characteristic.setValue(text)
+            })
+            dialog.show()
+        }
+
     }
 
     override fun onBindGroupViewHolder(
@@ -101,5 +119,21 @@ class BLESingleDeviceAdapter(private val serviceList: MutableList<BLEService>) :
         holder.serviceUuid.text = group.title
     }
 
+    fun proprieties(property: Int): StringBuilder {
+        val sb = StringBuilder()
+        if (property and BluetoothGattCharacteristic.PROPERTY_WRITE != 0) {
+            sb.append("Ecrire")
+        }
+        if (property and BluetoothGattCharacteristic.PROPERTY_READ != 0) {
+            sb.append(" Lire")
+        }
+        if (property and BluetoothGattCharacteristic.PROPERTY_NOTIFY != 0) {
+            sb.append(" Notifier")
+        }
+        if (sb.isEmpty()) sb.append("Aucune")
+        return sb
+    }
 
 }
+
+

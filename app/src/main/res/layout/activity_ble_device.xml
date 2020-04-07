@@ -10,20 +10,18 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/BLEServiceList"
         android:layout_width="0dp"
-        android:layout_height="613dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <TextView
         android:id="@+id/DeviceNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="monospace"
         android:text="TextView"
         android:textStyle="bold"
@@ -34,21 +32,23 @@
         android:id="@+id/DeviceAddressTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/DeviceNameTextView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/DeviceNameTextView"
         app:layout_constraintTop_toBottomOf="@+id/DeviceNameTextView" />
 
     <View
         android:id="@+id/view"
         android:layout_width="410dp"
         android:layout_height="7dp"
+        android:layout_marginTop="16dp"
         android:background="#6A6A6A"
-        app:layout_constraintBottom_toTopOf="@+id/BLEServiceList"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DeviceAddressTextView"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.004"
         tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>
