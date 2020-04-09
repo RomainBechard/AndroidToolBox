@@ -4,15 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WebServicesActivity">
+    android:background="#D7D3D1D1"
+    tools:context=".activities.WebServicesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RandomPokemonDataRecyclerView"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:id="@+id/RandomUserDataRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:background="#D7D3D1D1"
         app:layout_constraintBottom_toBottomOf="parent"

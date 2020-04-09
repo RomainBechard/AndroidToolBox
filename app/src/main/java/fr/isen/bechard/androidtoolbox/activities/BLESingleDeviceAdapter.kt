@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.on_click_device_cell.view.*
 
 
 class BLESingleDeviceAdapter(
-    private val serviceList: MutableList<BLEService>,
+    serviceList: MutableList<BLEService>,
     private val context: Context
 ) :
     ExpandableRecyclerViewAdapter<BLESingleDeviceAdapter.ServiceViewHolder, BLESingleDeviceAdapter.CharacteristicViewHolder>(

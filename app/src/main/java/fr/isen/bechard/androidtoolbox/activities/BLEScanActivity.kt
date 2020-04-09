@@ -102,10 +102,7 @@ class BLEScanActivity : AppCompatActivity() {
     }
 
     private fun initBLEScan() {
-        adapter = BLEDeviceAdapter(
-            arrayListOf(),
-            ::onDeviceClicked
-        )
+        adapter = BLEDeviceAdapter(arrayListOf(), ::onDeviceClicked)
         BluetoothDevicesRecyclerView.adapter = adapter
         BluetoothDevicesRecyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
 

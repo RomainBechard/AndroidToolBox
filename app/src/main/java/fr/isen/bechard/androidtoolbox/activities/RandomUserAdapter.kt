@@ -1,4 +1,4 @@
-package fr.isen.bechard.androidtoolbox
+package fr.isen.bechard.androidtoolbox.activities
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,32 +7,33 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import fr.isen.bechard.androidtoolbox.dataClass.RandomPokemonData
-import kotlinx.android.synthetic.main.activity_random_user_cell.view.*
+import fr.isen.bechard.androidtoolbox.R
+import fr.isen.bechard.androidtoolbox.dataClass.RandomUser
+import kotlinx.android.synthetic.main.activity_user_information.view.*
 
-class RandomUserAdapter(private val randomPokemon: RandomPokemonData) :
-    RecyclerView.Adapter<RandomUserAdapter.UserViewHolder>() {
+class RandomUserAdapter(private val rdnUserList: ArrayList<RandomUser>) :
+    RecyclerView.Adapter<RandomUserAdapter.ContactViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val view: View =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.activity_random_user_cell, parent, false)
-        return UserViewHolder(view)
+    override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ContactViewHolder {
+        val view = LayoutInflater.from(viewGroup.context)
+            .inflate(R.layout.activity_random_user_cell, viewGroup, false)
+        return ContactViewHolder(view)
     }
 
-    override fun getItemCount()= randomPokemon.results.size
-
-    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.UserNameAndSurname.text = randomPokemon.results[position].name
-        holder.UserMail.text = randomPokemon.results[position].mail
-        Picasso.get()
-            .load(randomPokemon.results[position].picture)
-            .into(holder.UserImage)
+    override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
+        val rdnUser = rdnUserList[position]
+        holder.name.text = rdnUser.name?.fullName()
+        holder.email.text = rdnUser.email
+        holder.address.text = rdnUser.location?.address()
+        Picasso.get().load(rdnUser.picture?.large).into(holder.avatar)
     }
 
-    class UserViewHolder(contactView: View) : RecyclerView.ViewHolder(contactView) {
-        val UserNameAndSurname: TextView = contactView.UserNameAndSurname
-        val UserMail: TextView = contactView.RandomUserMail
-        val UserImage: ImageView = contactView.PokemonImageView
+    override fun getItemCount(): Int = rdnUserList.size
+
+    class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var name: TextView = itemView.UserName
+        var email: TextView = itemView.UserMail
+        var address: TextView = itemView.UserAddress
+        var avatar: ImageView = itemView.ImageUser
     }
 }

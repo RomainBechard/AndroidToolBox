@@ -28,7 +28,7 @@ class BLEDeviceAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BLEDeviceAdapter.DevicesViewHolder {
+    ): DevicesViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.activity_ble_scan_device_cell, parent, false)
 
@@ -38,7 +38,7 @@ class BLEDeviceAdapter(
 
     override fun getItemCount(): Int = scanResults.size
 
-    override fun onBindViewHolder(holder: BLEDeviceAdapter.DevicesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DevicesViewHolder, position: Int) {
         holder.deviceName.text = scanResults[position].device.name ?: "Device Unknown"
         holder.deviceMac.text = scanResults[position].device.address
         holder.deviceRSSI.text = scanResults[position].rssi.toString()

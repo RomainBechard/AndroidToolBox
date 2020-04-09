@@ -3,11 +3,9 @@ package fr.isen.bechard.androidtoolbox.activities
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import fr.isen.bechard.androidtoolbox.*
 import kotlinx.android.synthetic.main.activity_home.*
 

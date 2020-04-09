@@ -1,54 +1,81 @@
-package fr.isen.bechard.androidtoolbox
+package fr.isen.bechard.androidtoolbox.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
-import fr.isen.bechard.androidtoolbox.dataClass.RandomPokemonData
+import fr.isen.bechard.androidtoolbox.R
+import fr.isen.bechard.androidtoolbox.dataClass.RandomUser
 import kotlinx.android.synthetic.main.activity_web_services.*
 
 class WebServicesActivity : AppCompatActivity() {
 
-    private fun displayRandomUsers() {
-        val queue = Volley.newRequestQueue(this)
-        val url =
-            "https://randomuser.me/api/?inc=name,picture&results=15&noinfo&nat=fr&format=pretty"
-
-        // Request a string response from the provided URL.
-        val stringRequest = StringRequest(
-            Request.Method.GET, url,
-            Response.Listener<String> { response ->
-                val randomUsersObj =
-                    Gson().fromJson(response.toString(), RandomPokemonData::class.java)
-
-                Log.d("RESPONSE API", response)
-                RandomPokemonDataRecyclerView.layoutManager = LinearLayoutManager(this)
-                RandomPokemonDataRecyclerView.adapter = RandomUserAdapter(randomUsersObj)
-            },
-            Response.ErrorListener {
-                Toast.makeText(applicationContext, "Error during GET request", Toast.LENGTH_SHORT).show()
-            })
-
-        queue.add(stringRequest)
-    }
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_services)
 
-        displayRandomUsers()
+        val recyclerView = RandomUserDataRecyclerView
+        val layoutManager = LinearLayoutManager(this)
+        val mDividerItemDecoration = DividerItemDecoration(
+            recyclerView.context,
+            layoutManager.orientation
+        )
+        recyclerView.addItemDecoration(mDividerItemDecoration)
 
-        Log.d("STATUS", "onCreate")
+        requestRandomUser(50, RandomUserDataRecyclerView)
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d("STATUS", "onResume")
+    private fun requestRandomUser(number: Int, recycler : RecyclerView) : ArrayList<RandomUser> {
+
+        val queue = Volley.newRequestQueue(this)
+        val url = "https://randomuser.me/api/1.1/?results=10&nat=fr"
+        val arrayRdnUser = ArrayList<RandomUser>()
+
+        val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
+            Response.Listener { response ->
+
+                val jsonArray = response.getJSONArray("results")
+
+                for (i in 0 until jsonArray.length()) {
+                    val rdnUser = Gson().fromJson(jsonArray[i].toString(), RandomUser::class.java)
+                    arrayRdnUser.add(rdnUser)
+                }
+
+                Log.d("RandomUser", arrayRdnUser.toString())
+
+                viewManager = LinearLayoutManager(this)
+                viewAdapter = RandomUserAdapter(arrayRdnUser)
+
+                recycler.apply {
+                    layoutManager = viewManager
+                    adapter = viewAdapter
+                }
+            },
+            Response.ErrorListener { error ->
+                Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show()
+                Log.d("RandomUser", "ERROR Json : $error \nGo to https://stackoverflow.com/search?q=$error \nOr please, change user and try again :)")
+            }
+        )
+        queue.add(jsonObjectRequest)
+        return arrayRdnUser
+    }
+    private fun onUserClicked(user: RandomUser) {
+        val intent = Intent(this, UserInformationActivity::class.java)
+        intent.putExtra("user", user)
+        startActivity(intent)
     }
 }
+
+
