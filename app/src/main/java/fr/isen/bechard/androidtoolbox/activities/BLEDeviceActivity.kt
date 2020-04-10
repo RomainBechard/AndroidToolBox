@@ -64,7 +64,6 @@ class BLEDeviceActivity : AppCompatActivity() {
                     }
                 }
             }
-
             // New services discovered
             override fun onServicesDiscovered(gatt: BluetoothGatt, status: Int) {
                 super.onServicesDiscovered(gatt, status)
@@ -76,7 +75,8 @@ class BLEDeviceActivity : AppCompatActivity() {
                                 it.characteristics
                             )
                         }?.toMutableList() ?: arrayListOf(),
-                        this@BLEDeviceActivity
+                        this@BLEDeviceActivity,
+                        gatt
                     )
                     BLEServiceList.layoutManager = LinearLayoutManager(this@BLEDeviceActivity)
                 }
@@ -88,10 +88,11 @@ class BLEDeviceActivity : AppCompatActivity() {
                 characteristic: BluetoothGattCharacteristic,
                 status: Int
             ) {
-                when (status) {
-                    BluetoothGatt.GATT_SUCCESS -> {
-                        adapter.notifyDataSetChanged()
-                    }
+                adapter.notifyDataSetChanged()
+                val value = characteristic?.getStringValue(0)
+                Log.e("CharRead", "onCharacteristicRead: $value")
+                runOnUiThread {
+                    BLEServiceList.adapter?.notifyDataSetChanged()
                 }
             }
 
@@ -100,15 +101,42 @@ class BLEDeviceActivity : AppCompatActivity() {
                 characteristic: BluetoothGattCharacteristic?,
                 status: Int
             ) {
-                when (status) {
-                    BluetoothGatt.GATT_SUCCESS -> {
-                        adapter.notifyDataSetChanged()
-                    }
+                val value = characteristic?.value
+                Log.e(
+                    "CharWrite",
+                    "onCharacteristicWrite: $value"
+                )
+                runOnUiThread {
+                    BLEServiceList.adapter?.notifyDataSetChanged()
+                }
+            }
+
+            override fun onCharacteristicChanged(
+                gatt: BluetoothGatt?,
+                characteristic: BluetoothGattCharacteristic
+            ) {
+                val value = byteArrayToHexString(characteristic.value)
+                Log.e(
+                    "TAG",
+                    "onCharacteristicChanged: $value"
+                )
+                runOnUiThread {
+                    BLEServiceList.adapter?.notifyDataSetChanged()
                 }
             }
         })
-        bluetoothGatt?.connect()
     }
+
+    private fun byteArrayToHexString(array: ByteArray): String {
+        val result = StringBuilder(array.size * 2)
+        for ( byte in array ) {
+            val toAppend = String.format("%X", byte) // hexadecimal
+            result.append(toAppend).append("-")
+        }
+        result.setLength(result.length - 1) // remove last '-'
+        return result.toString()
+    }
+
 
     companion object {
         private val TAG = "BLEDeviceActivity"

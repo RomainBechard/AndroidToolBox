@@ -1,11 +1,8 @@
 package fr.isen.bechard.androidtoolbox.dataClass
 
-import android.os.Parcelable
 import com.google.gson.Gson
-import kotlinx.android.parcel.Parcelize
 
-@Parcelize
-class RandomUser : Parcelable {
+class RandomUser {
 
     var gender: String? = null
     var name: Name? = null
@@ -39,7 +36,6 @@ class RandomUser : Parcelable {
     }
 
     class Name {
-        var title: String? = null
         var first: String? = null
         var last: String? = null
         override fun toString(): String {
@@ -51,7 +47,6 @@ class RandomUser : Parcelable {
     }
 
     class Location {
-        var street: String? = null
         var city: String? = null
         var state: String? = null
         var postcode: String? = null
@@ -59,7 +54,7 @@ class RandomUser : Parcelable {
             return g.toJson(this)
         }
         fun address(): String{
-            return "$street, $postcode $city, $state"
+            return "$postcode $city, $state"
         }
     }
 

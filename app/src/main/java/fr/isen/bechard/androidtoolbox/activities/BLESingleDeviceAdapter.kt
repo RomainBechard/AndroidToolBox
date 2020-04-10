@@ -1,7 +1,9 @@
 package fr.isen.bechard.androidtoolbox.activities
 
 import android.app.AlertDialog
+import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCharacteristic
+import android.bluetooth.BluetoothGattDescriptor
 import android.content.Context
 import android.content.DialogInterface
 import android.view.LayoutInflater
@@ -22,11 +24,15 @@ import kotlinx.android.synthetic.main.on_click_device_cell.view.*
 
 class BLESingleDeviceAdapter(
     serviceList: MutableList<BLEService>,
-    private val context: Context
+    private val context: Context,
+    gatt: BluetoothGatt?
 ) :
     ExpandableRecyclerViewAdapter<BLESingleDeviceAdapter.ServiceViewHolder, BLESingleDeviceAdapter.CharacteristicViewHolder>(
         serviceList
     ) {
+
+    private val bleGATT: BluetoothGatt? = gatt
+    private var notify: Boolean = false
 
     class ServiceViewHolder(itemView: View) : GroupViewHolder(itemView) {
         val serviceName: TextView = itemView.ServiceNameTextView
@@ -79,6 +85,7 @@ class BLESingleDeviceAdapter(
         holder.characteristicUUID.text = uuidMessage
         holder.characteristicName.text = title
 
+
         if (!proprieties(characteristic.properties).contains("Lire"))
             holder.characteristicRead.visibility = View.GONE
         if (!proprieties(characteristic.properties).contains("Ecrire"))
@@ -86,11 +93,15 @@ class BLESingleDeviceAdapter(
         if (!proprieties(characteristic.properties).contains("Notifier"))
             holder.characteristicNotify.visibility = View.GONE
 
+        holder.characteristicProperties.text = "Propriétés = ${proprieties(characteristic.properties)}"
+
         holder.characteristicRead.setOnClickListener {
-            if (characteristic.value == null)
-                holder.characteristicValue.text = "Value = null"
-            else
-                holder.characteristicValue.text = "Value = " + characteristic.value.toString()
+            bleGATT?.readCharacteristic(characteristic)
+            if (characteristic.value != null) {
+                holder.characteristicValue.text =  "Valeur : ${String (characteristic.value)}"
+            } else {
+                holder.characteristicValue.text =  "Valeur : no value yet"
+            }
         }
 
         holder.characteristicWrite.setOnClickListener {
@@ -102,8 +113,39 @@ class BLESingleDeviceAdapter(
                     _, _ ->
                 val text : String = editView.StringToSendEditText.text.toString()
                 characteristic.setValue(text)
+                bleGATT?.writeCharacteristic(characteristic)
             })
             dialog.show()
+        }
+
+        holder.characteristicNotify.setOnClickListener {
+            if (!notify){
+                notify = true
+                bleGATT?.setCharacteristicNotification(characteristic, true)
+                if (characteristic.descriptors.size > 0) {
+
+                    val descriptors = characteristic.descriptors
+                    for (descriptor in descriptors) {
+
+                        if (characteristic.properties and BluetoothGattCharacteristic.PROPERTY_NOTIFY != 0) {
+                            descriptor.value = BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
+                        } else if (characteristic.properties and BluetoothGattCharacteristic.PROPERTY_INDICATE != 0) {
+                            descriptor.value = BluetoothGattDescriptor.ENABLE_INDICATION_VALUE
+                        }
+                        bleGATT?.writeDescriptor(descriptor)
+                    }
+                }
+            } else {
+                notify = false
+                bleGATT?.setCharacteristicNotification(characteristic, false)
+            }
+        }
+
+        if (characteristic.uuid.toString() == BLEUUIDMatching.getBLEAttributeFromUUID(characteristic.uuid.toString()).uuid && notify){
+            if (characteristic.value == null)
+                holder.characteristicValue.text =  "Valeur = 0"
+            else
+                holder.characteristicValue.text = "Valeur = ${byteArrayToHexString(characteristic.value)}"
         }
 
     }
@@ -134,6 +176,15 @@ class BLESingleDeviceAdapter(
         return sb
     }
 
+    private fun byteArrayToHexString(array: ByteArray): String {
+        val result = StringBuilder(array.size * 2)
+        for ( byte in array ) {
+            val toAppend = String.format("%X", byte) // hexadecimal
+            result.append(toAppend).append("-")
+        }
+        result.setLength(result.length - 1) // remove last '-'
+        return result.toString()
+    }
 }
 
 

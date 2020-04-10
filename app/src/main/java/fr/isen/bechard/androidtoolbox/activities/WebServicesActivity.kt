@@ -1,6 +1,5 @@
 package fr.isen.bechard.androidtoolbox.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -22,6 +21,8 @@ class WebServicesActivity : AppCompatActivity() {
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
 
+    private var arrayUsr : ArrayList<RandomUser> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_services)
@@ -34,13 +35,14 @@ class WebServicesActivity : AppCompatActivity() {
         )
         recyclerView.addItemDecoration(mDividerItemDecoration)
 
-        requestRandomUser(50, RandomUserDataRecyclerView)
+
+        requestRandomUser(30, RandomUserDataRecyclerView)
     }
 
     private fun requestRandomUser(number: Int, recycler : RecyclerView) : ArrayList<RandomUser> {
 
         val queue = Volley.newRequestQueue(this)
-        val url = "https://randomuser.me/api/1.1/?results=10&nat=fr"
+        val url = "https://randomuser.me/api/1.1/?results=$number&nat=fr"
         val arrayRdnUser = ArrayList<RandomUser>()
 
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
@@ -71,11 +73,4 @@ class WebServicesActivity : AppCompatActivity() {
         queue.add(jsonObjectRequest)
         return arrayRdnUser
     }
-    private fun onUserClicked(user: RandomUser) {
-        val intent = Intent(this, UserInformationActivity::class.java)
-        intent.putExtra("user", user)
-        startActivity(intent)
-    }
 }
-
-
