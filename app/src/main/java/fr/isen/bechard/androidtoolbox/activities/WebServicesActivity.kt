@@ -1,76 +1,80 @@
 package fr.isen.bechard.androidtoolbox.activities
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
-import com.google.gson.Gson
 import fr.isen.bechard.androidtoolbox.R
-import fr.isen.bechard.androidtoolbox.dataClass.RandomUser
-import kotlinx.android.synthetic.main.activity_web_services.*
+import fr.isen.bechard.androidtoolbox.dataClass.ProductSample
+import kotlinx.android.synthetic.main.compare.*
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
+import java.nio.charset.Charset
+import java.util.*
 
-class WebServicesActivity : AppCompatActivity() {
+class WebServicesActivity : Fragment() {
 
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
-    private lateinit var viewManager: RecyclerView.LayoutManager
-
-    private var arrayUsr : ArrayList<RandomUser> = ArrayList()
+    val products: List<ProductSample> =
+        ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_web_services)
-
-        val recyclerView = RandomUserDataRecyclerView
-        val layoutManager = LinearLayoutManager(this)
-        val mDividerItemDecoration = DividerItemDecoration(
-            recyclerView.context,
-            layoutManager.orientation
-        )
-        recyclerView.addItemDecoration(mDividerItemDecoration)
-
-
-        requestRandomUser(30, RandomUserDataRecyclerView)
+        retainInstance = true
+        readCSV(products)
     }
 
-    private fun requestRandomUser(number: Int, recycler : RecyclerView) : ArrayList<RandomUser> {
-
-        val queue = Volley.newRequestQueue(this)
-        val url = "https://randomuser.me/api/1.1/?results=$number&nat=fr"
-        val arrayRdnUser = ArrayList<RandomUser>()
-
-        val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
-            Response.Listener { response ->
-
-                val jsonArray = response.getJSONArray("results")
-
-                for (i in 0 until jsonArray.length()) {
-                    val rdnUser = Gson().fromJson(jsonArray[i].toString(), RandomUser::class.java)
-                    arrayRdnUser.add(rdnUser)
-                }
-
-                Log.d("RandomUser", arrayRdnUser.toString())
-
-                viewManager = LinearLayoutManager(this)
-                viewAdapter = RandomUserAdapter(arrayRdnUser)
-
-                recycler.apply {
-                    layoutManager = viewManager
-                    adapter = viewAdapter
-                }
-            },
-            Response.ErrorListener { error ->
-                Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show()
-                Log.d("RandomUser", "ERROR Json : $error \nGo to https://stackoverflow.com/search?q=$error \nOr please, change user and try again :)")
-            }
+    private fun readCSV(products: List<ProductSample>) {
+        val `is` = resources.openRawResource(R.raw.bdd_code_barre)
+        val reader = BufferedReader(
+            InputStreamReader(`is`, Charset.forName("UTF-8"))
         )
-        queue.add(jsonObjectRequest)
-        return arrayRdnUser
+        var line = ""
+        try {
+            while (reader.readLine().also { line = it } != null) {
+                val tokens = line.split(",").toTypedArray()
+                val sample: ProductSample = ProductSample()
+                val qte = tokens[1].toInt()
+                sample.qte = qte
+                sample.code_barre = tokens[2]
+                sample.ref_fournisseur = tokens[3]
+                sample.designation = tokens[4]
+                val prix = tokens[5].toFloat()
+                sample.prix_normal = prix
+                val prixSoldes = tokens[6].toFloat()
+                sample.prix_soldes = prix
+                val prixPromo = tokens[7].toFloat()
+                sample.prix_promo = prix
+                sample.taille = tokens[8]
+                sample.couleur = tokens[9]
+                products.toMutableList().add(sample)
+            }
+
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.compare, container, false)
+
+    // populate the views now that the layout has been inflated
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // RecyclerView node initialized here
+        ProductsView.apply {
+            // set a LinearLayoutManager to handle Android
+            // RecyclerView behavior
+            layoutManager = LinearLayoutManager(activity)
+            // set the custom adapter to the RecyclerView
+            adapter = ListAdapter(products)
+        }
+    }
+
+    companion object {
+        fun newInstance(): WebServicesActivity = WebServicesActivity()
     }
 }
